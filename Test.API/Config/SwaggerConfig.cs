@@ -7,7 +7,7 @@ namespace Test.API
     public static class SwaggerConfig
     {
         public static void ConfigureSwagger(this IServiceCollection services)
-        {   
+        {
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc($"v{Assembly.GetExecutingAssembly().GetName().Version.Major}", new OpenApiInfo

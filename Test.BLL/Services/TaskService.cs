@@ -1,17 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.Logging;
+using Test.DAL;
 using Test.DM;
 
 namespace Test.BLL
 {
     public class TaskService : ITaskService
     {
-        public Task<Guid> CreateNewTaskAsync(TaskModel task)
+        private readonly IRepository _repository;
+
+        public TaskService(IRepository repository)
         {
-            throw new NotImplementedException();
+            _repository = repository;
+        }
+
+        public async Task<Guid> CreateNewTaskAsync()
+        {
+            var result = new Guid();
+
+            try
+            {
+                result = await _repository.CreateNewAsync();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return result;
         }
 
         public Task<TaskModel> GetTaskByIdAsync(Guid taskId)

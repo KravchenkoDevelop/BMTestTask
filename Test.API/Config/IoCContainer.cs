@@ -12,7 +12,7 @@ namespace Test.API
         /// <param name="services"></param>
         public static void RegisterServices(this IServiceCollection services)
         {
-            services.AddScoped<ITaskService,TaskService>();
+            services.AddScoped<ITaskService, TaskService>();
         }
 
         /// <summary>

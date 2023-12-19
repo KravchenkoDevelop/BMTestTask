@@ -1,16 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Test.DM;
+﻿using Test.DM;
 
 namespace Test.BLL
 {
     public interface ITaskService
     {
-        public Task<Guid> CreateNewTaskAsync(TaskModel task);
+        /// <summary>
+        /// create new task object
+        /// </summary>
+        /// <returns>guid</returns>
+        public Task<Guid> CreateNewTaskAsync();
 
+        /// <summary>
+        /// get task object by id
+        /// </summary>
+        /// <param name="taskId">task id guid type</param>
+        /// <returns>task object</returns>
         public Task<TaskModel> GetTaskByIdAsync(Guid taskId);
     }
 }

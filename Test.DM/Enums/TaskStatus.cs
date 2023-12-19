@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Test.DM
 {
@@ -14,10 +8,10 @@ namespace Test.DM
         [Display(Name = "Created")]
         Created = 0,
 
-        [Display(Name = "In progress")]
+        [Display(Name = "Runnin")]
         InProgress = 1,
 
-        [Display(Name = "Done")]
+        [Display(Name = "Finished")]
         Done = 2,
     }
 }

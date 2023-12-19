@@ -25,7 +25,7 @@ namespace Test.API
         public static void ApiRuntime(this IApplicationBuilder app)
         {
             app.UseStatusCodePages();
-            app.UseDefaultFiles();  
+            app.UseDefaultFiles();
             app.UseHttpsRedirection();
 
             app.UseRouting();

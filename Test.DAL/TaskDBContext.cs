@@ -1,9 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Test.DM;
 
 namespace Test.DAL
 {
@@ -16,9 +12,9 @@ namespace Test.DAL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-           
+
         }
 
-        public DbSet<Task> Tasks { get; set;}
+        public DbSet<TaskModel> Tasks { get; set; }
     }
 }
