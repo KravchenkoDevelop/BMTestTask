@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Test.BLL;
 using Test.DM;
 
@@ -26,10 +27,7 @@ namespace Test.API.Controllers
 
                 _logger.LogInformation($"Created new task. Task Guid = {result}");
 
-                return new ObjectResult(result)
-                {
-                    StatusCode = StatusCodes.Status202Accepted
-                };
+                return Accepted(result);
             }
             catch (Exception ex)
             {
@@ -44,24 +42,21 @@ namespace Test.API.Controllers
             var result = new TaskModel();
             try
             {
-                result = await _taskService.GetTaskByIdAsync(id);
-
-                switch (result.Id)
+                if (id != new Guid())
                 {
-                    case var r when result.Id == id:
+                    result = await _taskService.GetTaskByIdAsync(id);
+
+                    if (result != null)
+                    {
                         _logger.LogInformation($"Returned task with guid {id}");
                         return Ok(new { result.Id, result.Status });
-                        break;
+                    }
 
-                    case var r when result.Id == new Guid():
-                        _logger.LogInformation($"Requested task with guid {id} not found");
-                        return NotFound();
-                        break;
-
-                    default:
-                        return BadRequest();
-                        break;
+                    _logger.LogInformation($"Requested task with guid {id} not found");
+                    return NotFound();
                 }
+
+                return BadRequest();
             }
             catch (Exception ex)
             {
