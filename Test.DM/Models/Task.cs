@@ -19,6 +19,6 @@
         /// <summary>
         /// task status
         /// </summary>
-        public TaskStatus Status { get; set; } = TaskStatus.Created;
+        public TaskStatus Status { get; set; }
     }
 }

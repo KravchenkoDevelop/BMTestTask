@@ -23,7 +23,7 @@ namespace Test.API
         {
             services.AddScoped<IRepository, Repository>();
 
-            services.AddDbContext<TaskDBContext>(o => o.UseInMemoryDatabase("TasksDB"));
+            services.AddDbContext<TaskDBContext>(o => o.UseInMemoryDatabase("TasksDB"), ServiceLifetime.Singleton);
         }
     }
 }

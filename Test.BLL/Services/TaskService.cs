@@ -29,9 +29,20 @@ namespace Test.BLL
             return result;
         }
 
-        public Task<TaskModel> GetTaskByIdAsync(Guid taskId)
+        public async Task<TaskModel> GetTaskByIdAsync(Guid taskId)
         {
-            throw new NotImplementedException();
+            var result = new TaskModel();
+
+            try
+            {
+                result = await _repository.GetByIdAsync(taskId);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return result;
         }
     }
 }

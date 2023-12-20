@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Test.DM;
 
 namespace Test.DAL
@@ -20,13 +21,14 @@ namespace Test.DAL
             {
                 var nTask = new TaskModel();
 
-                using (var context=_context)
-                {
-                    await context.Tasks.AddAsync(nTask);
-                    await context.SaveChangesAsync();
-                   
-                    result = nTask.Id;
-                }
+
+                await _context.Tasks.AddAsync(nTask);
+                await _context.SaveChangesAsync();
+
+                result = nTask.Id;
+
+                Task.Run(() => UpdateState(result, 10, DM.TaskStatus.InProgress));
+
             }
             catch (Exception ex)
             {
@@ -36,9 +38,42 @@ namespace Test.DAL
             return result;
         }
 
-        public Task<TaskModel> GetByIdAsync(Guid id)
+        public async Task<TaskModel> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var result = new TaskModel();
+
+            try
+            {
+                result = await _context.Tasks.FirstOrDefaultAsync(t => t.Id == id);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return result;
+
+        }
+
+        private async Task UpdateState(Guid id, int timeout, DM.TaskStatus status)
+        {
+            Thread.Sleep(TimeSpan.FromSeconds(timeout));
+
+            try
+            {
+                var upd = _context.Tasks.First(t => t.Id == id);
+
+                upd.Status = status;
+                upd.ChangeDate = DateTime.Now;
+
+                _context.Tasks.Update(upd);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            Task.Run(() => UpdateState(id, 120, DM.TaskStatus.Done));
         }
     }
 }
