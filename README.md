@@ -1,2 +1,3 @@
 # BMTestTask
-test task 
+Test task for Brand Monitor
+
