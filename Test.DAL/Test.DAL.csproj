@@ -10,4 +10,10 @@
     <ProjectReference Include="..\Test.DM\Test.DM.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.0" />
+  </ItemGroup>
+
 </Project>
