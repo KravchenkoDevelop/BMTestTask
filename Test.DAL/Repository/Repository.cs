@@ -25,7 +25,7 @@ namespace Test.DAL
                 await _context.Tasks.AddAsync(nTask);
                 await _context.SaveChangesAsync();
 
-                result = nTask.Id;
+                result = (Guid)nTask.Id;
 
                 Task.Run(() => UpdateState(result, 10, DM.TaskStatus.InProgress));
 
