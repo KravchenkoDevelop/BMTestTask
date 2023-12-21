@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Filters;
 using System.Net;
+using Test.API.Examples.Responses;
 
 namespace Test.API.Controllers
 {
@@ -26,7 +27,7 @@ namespace Test.API.Controllers
         /// <param name="id">task id Guid</param>
         /// <returns></returns>
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(Guid), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(TaskResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public partial Task<IActionResult> GetTaskAsync(Guid id);

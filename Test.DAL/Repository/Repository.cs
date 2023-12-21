@@ -60,24 +60,24 @@ namespace Test.DAL
 
             try
             {
-               var upd = _context.Tasks.First(t => t.Id ==id)
-               
-               if(upd.Status==DM.TaskStatus.Created ||upd.Status==DM.TaskStatus.InProgress )
-               {               
-                  upd.Status = status;
-                  upd.ChangeDate = DateTime.Now;
-                  _context.Tasks.Update(upd);
-                  await _context.SaveChangesAsync();
-                  
-                  Task.Run(() => UpdateState(id, 120, DM.TaskStatus.Done));
-               }                         
+                var upd = _context.Tasks.First(t => t.Id == id);
+
+                if (upd.Status == DM.TaskStatus.Created || upd.Status == DM.TaskStatus.InProgress)
+                {
+                    upd.Status = status;
+                    upd.ChangeDate = DateTime.Now;
+                    _context.Tasks.Update(upd);
+                    await _context.SaveChangesAsync();
+
+                    Task.Run(() => UpdateState(id, 120, DM.TaskStatus.Done));
+                }
             }
             catch (Exception ex)
             {
                 throw;
             }
 
-            
+
         }
     }
 }
